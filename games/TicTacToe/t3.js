@@ -34,7 +34,7 @@ function checkForWinner() {
         }),
         success: function (responseString) {
             var response = JSON.parse(responseString);
-            console.log(response);
+            // console.log(response);
             var message = '';
             switch (response.result) {
             	case null: //Game Not over
