@@ -8,34 +8,55 @@ use PHPUnit\Framework\TestCase;
 use Tests\Traits\Faker;
 
 /**
+ * PHPUnit test to cover abstract Tic-Tac-Toe Engine
+ *
  * @covers \Games\TicTacToe\Engines\EngineAbstract
  */
 final class EngineAbstractTest extends TestCase
 {
     use Faker;
 
-    /** @var GameState */
+    /**
+     * Mock Game State
+     *
+     * @var GameState
+     */
     protected $mockState;
 
-    /** @var Engine */
+    /**
+     * Mock Game Engine created from the abstract
+     *
+     * @var EngineAbstract
+     */
     protected $mockEngine;
 
+    /**
+     * Pre-test Set Up
+     *
+     * Initializes various properties for use in testing
+     */
     public function setUp()
     {
         $this->mockState = $this->createMock(GameState::class);
 
         $this->mockEngine = $this->getMockForAbstractClass(EngineAbstract::class, [$this->mockState]);
-        // $stub->expects($this->any())
-        //      ->method('abstractMethod')
-        //      ->will($this->returnValue(TRUE));
     }
 
+    /**
+     * Tests class constructor
+     */
     public function testCanBeCreated()
     {
         $this->assertInstanceOf(EngineAbstract::class, $this->mockEngine);
         $this->assertInstanceOf(EngineInterface::class, $this->mockEngine);
     }
 
+    /**
+     * Tests basic EngineAbstract::getMove() functionality
+     *
+     * Tests that EngineAbstract::getMove() should always return a
+     * single element returned by EngineAbstract::getConsideredMoves()
+     */
     public function testGetMoveReturnsFromConsidered()
     {
         $testOptions = $this->getFaker()->words(10, false);

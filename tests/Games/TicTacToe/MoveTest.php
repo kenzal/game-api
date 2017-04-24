@@ -19,6 +19,11 @@ final class MoveTest extends TestCase
      */
     protected $mockState;
 
+    /**
+     * Pre-test Set Up
+     *
+     * Initializes various properties for use in testing
+     */
     public function setUp()
     {
         $this->mockState = $this->createMock(GameState::class);
@@ -93,6 +98,13 @@ final class MoveTest extends TestCase
         );
     }
 
+    /**
+     * Provider - Valid Coordiantes
+     *
+     * @return array[] Array of arguments arrays - arguments are:
+     *                      int X-Coordinate (0-based column)
+     *                      int Y-Coordinate (0-based row)
+     */
     public function validCoordinatesProvider()
     {
         $coordinates = [];
@@ -104,6 +116,13 @@ final class MoveTest extends TestCase
         return $coordinates;
     }
 
+    /**
+     * Provider - Invalid Coordiantes
+     *
+     * @return array[] Array of arguments arrays - arguments are:
+     *                      int X-Coordinate (0-based column)
+     *                      int Y-Coordinate (0-based row)
+     */
     public function invalidCoordinatesProvider()
     {
         return [

@@ -9,13 +9,45 @@ use Games\TicTacToe\Interfaces\EngineInterface;
 use PHPUnit\Framework\TestCase;
 
 /**
+ * PHPUnit test to cover Blocker Tic-Tac-Toe Engine
+ *
  * @covers \Games\TicTacToe\Engines\Blocker
  */
 final class BlockerTest extends TestCase
 {
-    /** @var GameState */
+    /**
+     * Mock Game State
+     *
+     * @var GameState
+     */
     protected $mockState;
 
+    /**
+     * Mock Game State for "Next Game"
+     *
+     * @var GameState
+     */
+    protected $nextState;
+
+    /**
+     * Stubbed Engine (for overriding Blocker::getNextState())
+     *
+     * @var Blocker
+     */
+    protected $mockEngine;
+
+    /**
+     * Moves Array
+     *
+     * @var Move[]
+     */
+    protected $moves;
+
+    /**
+     * Pre-test Set Up
+     *
+     * Initializes various properties for use in testing
+     */
     public function setUp()
     {
         $this->mockState = $this->createMock(GameState::class);
@@ -45,6 +77,9 @@ final class BlockerTest extends TestCase
              ->will($this->returnSelf());
     }
 
+    /**
+     * Tests class constructor
+     */
     public function testCanBeCreated()
     {
         $engine = new Blocker($this->mockState);
@@ -52,12 +87,18 @@ final class BlockerTest extends TestCase
         $this->assertInstanceOf(Blocker::class, $engine);
     }
 
+    /**
+     * Tests that class can be constructed with mock engine and that engine is set up
+     */
     public function testMockCanBeCreated()
     {
         $this->assertInstanceOf(EngineInterface::class, $this->mockEngine);
         $this->assertInstanceOf(Blocker::class, $this->mockEngine);
     }
 
+    /**
+     * Tests that all moves are returned when there are no block solutions
+     */
     public function testGetConsideredMovesReturnsFromConsideredWithZeroBlockSolutions()
     {
         $this->nextState->expects($this->exactly(count($this->moves)))
@@ -67,6 +108,9 @@ final class BlockerTest extends TestCase
         $this->assertSame($this->moves, $this->mockEngine->getConsideredMoves());
     }
 
+    /**
+     * Tests that one blocking move is returned when there is exactly one block solution
+     */
     public function testGetConsideredMovesReturnsCorrectMoveFromConsideredWithOneBlockSolution()
     {
         //Return True only on $this->moves[2]
@@ -80,6 +124,9 @@ final class BlockerTest extends TestCase
         $this->assertCount(1, $consideredMoves);
     }
 
+    /**
+     * Tests that all and only blocking moves are returned when there are multiple block solutions
+     */
     public function testGetConsideredMovesReturnsCorrectMoveFromConsideredWithMultipleBlockSolutions()
     {
         //Return True only on $this->moves[2], $this->moves[4]
@@ -94,6 +141,9 @@ final class BlockerTest extends TestCase
         $this->assertCount(2, $consideredMoves);
     }
 
+    /**
+     * Verifies that a the engine will select a blocking move over a winning one
+     */
     public function testIntegrationSelectBlockOverWin()
     {
         $state     = GameState::CreateFromString('X OX O   ', 'O');
@@ -104,17 +154,27 @@ final class BlockerTest extends TestCase
         $this->assertContains($winMove, $this->movesToArray($validMoves));
         $this->assertContains($blockMove, $this->movesToArray($validMoves));
 
-        $engine = new Blocker($state);
+        $engine          = new Blocker($state);
         $consideredMoves = $engine->getConsideredMoves();
 
         $this->assertNotContains($winMove, $this->movesToArray($consideredMoves));
         $this->assertContains($blockMove, $this->movesToArray($consideredMoves));
     }
 
+    /**
+     * Utility method to get an array of movement arrays from an array of Move objects
+     *
+     * @param Move[]  $moves array of Move objects
+     *
+     * @return array[] Move::asArray() mapped to each element of $moves
+     */
     protected function movesToArray(array $moves)
     {
-        return array_map(function (Move $move) {
-            return $move->asArray();
-        }, $moves);
+        return array_map(
+            function (Move $move) {
+                return $move->asArray();
+            },
+            $moves
+        );
     }
 }

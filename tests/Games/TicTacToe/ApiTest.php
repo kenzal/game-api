@@ -10,18 +10,33 @@ use Tests\Traits\Faker;
 use Games\TicTacToe\Move;
 
 /**
+ * PHPUnit Test covering the Tic-Tac-Toe API Class
+ *
  * @covers \Games\TicTacToe\Api
  */
 final class ApiTest extends TestCase
 {
     use Faker;
 
-    /** @var EngineInterface */
+    /**
+     * Mock Game Engine
+     *
+     * @var EngineInterface
+     */
     protected $mockEngine;
 
-    /** @var Api */
+    /**
+     * Stubbed Api for overwriting constructor and getEngine() method
+     *
+     * @var Api
+     */
     protected $stubbedApi;
 
+    /**
+     * Pre-test Set Up
+     *
+     * Initializes various properties for use in testing
+     */
     public function setUp()
     {
         $this->mockEngine = $this->createMock(EngineInterface::class);
@@ -36,6 +51,10 @@ final class ApiTest extends TestCase
     }
 
     /**
+     * Tests that initizalition fails with Exception thrown for bad arguments
+     *
+     * @param string $argument argument to pass to constructor
+     *
      * @dataProvider badEngineClassProvider
      */
     public function testInitializeWithBadClassFails(string $argument)
@@ -44,6 +63,9 @@ final class ApiTest extends TestCase
         new Api($argument);
     }
 
+    /**
+     * Test that the Api can be instanciated with mock engine
+     */
     public function testWithMockEngine()
     {
         $api = new Api(get_class($this->mockEngine));
@@ -53,6 +75,11 @@ final class ApiTest extends TestCase
     }
 
     /**
+     * Tests the makeMove() method
+     *
+     * @param Move   $move        Move to make
+     * @param string $playerToken character representing the player
+     *
      * @dataProvider moveProvider
      */
     public function testMakeMove(?Move $move, $playerToken)
@@ -78,15 +105,25 @@ final class ApiTest extends TestCase
     }
 
     /**
+     * Tests the getWinner() method
+     *
+     * @param array $boardstate board state
+     * @param mixed $expected   expected result
+     *
      * @dataProvider getWinnerProvider
      */
-    public function testGetWinner($boardstate, $expected)
+    public function testGetWinner(array $boardstate, $expected)
     {
         $this->assertSame($expected, $this->stubbedApi->getWinner($boardstate));
     }
 
 
-
+    /**
+     * Provider - Bad Engine Classes
+     *
+     * @return array[] Array of arguments arrays - arguments are:
+     *                     sting class names
+     */
     public function badEngineClassProvider()
     {
         return [
@@ -96,6 +133,13 @@ final class ApiTest extends TestCase
         ];
     }
 
+    /**
+     * Provider - getWinner
+     *
+     * @return array[] Array of arguments arrays - arguments are:
+     *                      string[][] single character two-dimensional array board state
+     *                      mixed      expected value
+     */
     public function getWinnerProvider()
     {
         return [
@@ -108,6 +152,12 @@ final class ApiTest extends TestCase
         ];
     }
 
+    /**
+     * Provider - Moves
+     *
+     * @return array[] Array of arguments arrays - arguments are:
+     *                      Move Game Move
+     */
     public function moveProvider()
     {
         $this->setUpFaker(); //Must be called explicitly in providers
