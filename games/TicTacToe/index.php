@@ -33,7 +33,7 @@ if (!array_key_exists($selectedEngine, $engines)) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header('Content-Type: application/json');
-    $api    = new API($engines[$selectedEngine]['class']);
+    $api    = new Api($engines[$selectedEngine]['class']);
     $action = $_REQUEST['action'] ?? 'makeMove';
     if ($action == 'makeMove') {
         $board  = $_REQUEST['boardState'] ?? null;
