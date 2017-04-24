@@ -14,12 +14,6 @@ if (!array_key_exists($selectedEngine, $engines)) {
     $selectedEngine = array_keys($engines)[0];
 }
 
-function sendBadRequest()
-{
-    http_response_code(400);
-    header("HTTP/1.0 400 Bad Request");
-    exit(1);
-}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header('Content-Type: application/json');
@@ -29,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $board  = $_REQUEST['boardState'] ?? null;
         $player = $_REQUEST['playerUnit'] ?? null;
         if (!is_array($board) || !is_string($player) || strlen($player)!==1) {
-            sendBadRequest();
+            goto sendBadRequest;
         }
         $move = $api->makeMove($board, $player);
         echo json_encode($move);
@@ -39,7 +33,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo json_encode($api->getWinner($board));
         return;
     }
-    sendBadRequest();
+
+    sendBadRequest: {
+        http_response_code(400);
+        header("HTTP/1.0 400 Bad Request");
+        exit(1);
+    }
 }
 
 ?>
@@ -119,7 +118,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <h1>Tic-Tac-Toe</h1>
         <h2>Welcome to Tic-Tac-Toe</h2>
         <p>The game is played by each player placing their mark in turns in the squares of the 3x3 grid below.</p>
-        <p>There are currently <?= count($engines) ?> computer opponents to chose from, each with a different strategy</p>
+        <p>There are currently <?= count($engines) ?> computer opponents to
+            chose from, each with a different strategy</p>
         <ul class="engineList">
             <?php foreach ($engines as $name => $engine) : ?>
                 <li>

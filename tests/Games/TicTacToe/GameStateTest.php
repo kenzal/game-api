@@ -7,9 +7,11 @@ use Games\TicTacToe\Move;
 use PHPUnit\Framework\TestCase;
 
 /**
+ * PHPUnit Test to cover Tic-Tac-Toe GameState class
+ *
  * @covers \Games\TicTacToe\GameState
  */
-final class GameStateTest extends TestCase
+class GameStateTest extends TestCase
 {
     const EMPTY_GAME_STRING = '         ';
     const EMPTY_GAME_ARRAY  = [
@@ -19,13 +21,17 @@ final class GameStateTest extends TestCase
     ];
 
     /**
-     * @expectedException \Error
+     * Test that GameState can not be instantiated directly
      */
     public function testCannotInstantiateWithNew()
     {
+        $this->expectException(\Error::class);
         new GameState;
     }
 
+    /**
+     * Verifies the Default configuration of a new game
+     */
     public function testNewGameDefaults()
     {
         $game = GameState::getNewGame();
@@ -40,6 +46,9 @@ final class GameStateTest extends TestCase
         $this->assertSame(self::EMPTY_GAME_STRING, $game->asString());
     }
 
+    /**
+     * Verifies that a newgame with custom player tokens makes use of them
+     */
     public function testNewGameCustomSymbols()
     {
         $first  = '1';
@@ -57,15 +66,21 @@ final class GameStateTest extends TestCase
     }
 
     /**
+     * Tests that a GameState::newGame() fails with exception when provided with bad arguments
+     *
+     * @param mixed $arguments ...arguments to pass to GameState::getNewGame()
+     *
      * @dataProvider newGameBadArgumentProvider
      */
-    public function testNewGameBadArguments($first, $second)
+    public function testNewGameBadArguments(...$arguments)
     {
         $this->expectException(\BadMethodCallException::class);
-        GameState::getNewGame($first, $second);
+        GameState::getNewGame(...$arguments);
     }
 
-
+    /**
+     * Tests creating a GameState from a string with default arguments
+     */
     public function testCreateNewGameFromStringWithDefaults()
     {
         $game = GameState::createFromString(self::EMPTY_GAME_STRING);
@@ -80,6 +95,9 @@ final class GameStateTest extends TestCase
         $this->assertSame(self::EMPTY_GAME_STRING, $game->asString());
     }
 
+    /**
+     * Tests creating a GameState from a string with a custom symbol for turn
+     */
     public function testCreateNewGameFromStringWithCustomTurnSymbol()
     {
         $symbol = 'H';
@@ -93,6 +111,9 @@ final class GameStateTest extends TestCase
         $this->assertSame(self::EMPTY_GAME_STRING, $game->asString());
     }
 
+    /**
+     * Tests creating a GameState from a string with a custom symbol in the board string
+     */
     public function testGameFromStringWithCustomSymbols()
     {
         $symbol = 'H';
@@ -108,6 +129,13 @@ final class GameStateTest extends TestCase
     }
 
     /**
+     * Tests that exception is thrown when attempting to create a game with bad arguments
+     *
+     * @param mixed  $boardString      board string argument
+     * @param mixed  $symbol           turn symbol argument
+     * @param string $exceptionClass   expected exception class
+     * @param string $exceptionMessage expected exception message
+     *
      * @dataProvider gameFromStringBadArgumentProvider
      */
     public function testGameFromStringWithBadArguments($boardString, $symbol, $exceptionClass, $exceptionMessage)
@@ -117,6 +145,9 @@ final class GameStateTest extends TestCase
         GameState::createFromString($boardString, $symbol);
     }
 
+    /**
+     * Tests that GameState::createFromArray() functions at the most basic usage
+     */
     public function testNewGameFromArray()
     {
         $game = GameState::createFromArray(self::EMPTY_GAME_ARRAY);
@@ -132,7 +163,9 @@ final class GameStateTest extends TestCase
     }
 
 
-
+    /**
+     * Tests that GameState::createFromArray() functions with empty strings instead of spaces
+     */
     public function testFromArrayWithNoSpaces()
     {
         $board = [['','',''],['','',''],['','','']];
@@ -148,7 +181,9 @@ final class GameStateTest extends TestCase
         $this->assertSame(self::EMPTY_GAME_STRING, $game->asString());
     }
 
-
+    /**
+     * Tests that GameState::createFromArray() functions with custom turn symbol
+     */
     public function testCreateNewGameFromArrayWithCustomTurnSymbol()
     {
         $symbol = 'H';
@@ -162,6 +197,9 @@ final class GameStateTest extends TestCase
         $this->assertSame(self::EMPTY_GAME_STRING, $game->asString());
     }
 
+    /**
+     * Tests that GameState::createFromArray() functions custom symbols in the array
+     */
     public function testGameFromArrayWithCustomSymbols()
     {
         $symbol = 'H';
@@ -180,6 +218,10 @@ final class GameStateTest extends TestCase
     }
 
     /**
+     * Tests that GameState::createFromArray() throws exceptions when passed bad arguments
+     *
+     * @param array $boardArray bad board arrays
+     *
      * @dataProvider gameFromArrayBadArgumentProvider
      */
     public function testGameFromArrayWithBadArguments(array $boardArray)
@@ -190,6 +232,10 @@ final class GameStateTest extends TestCase
     }
 
     /**
+     * Tests GameState::isEndGame() method for multiple end-game boards
+     *
+     * @param GameState $game game state
+     *
      * @dataProvider validEndGameProvider
      */
     public function testValidEndGame(GameState $game)
@@ -199,6 +245,10 @@ final class GameStateTest extends TestCase
 
 
     /**
+     * Tests that a game states createFrom*() and as*() are interoperable
+     *
+     * @param string $board game board for testing
+     *
      * @dataProvider variousGameStateProvider
      */
     public function testStringToClassToArrayToClassToString(string $board)
@@ -214,6 +264,10 @@ final class GameStateTest extends TestCase
     }
 
     /**
+     * Verifies that GameState::getValidMoves() returns false at all end game states
+     *
+     * @param GameState $game game state
+     *
      * @dataProvider validEndGameProvider
      */
     public function testGetValidMovesReturnsFalseForEndgame(GameState $game)
@@ -222,6 +276,9 @@ final class GameStateTest extends TestCase
         $this->assertFalse($game->getValidMoves());
     }
 
+    /**
+     * Verifies that all possible moves are available for brand new games
+     */
     public function testGetValidMovesReturnsAllMovesForNewGame()
     {
         $game = GameState::createFromString(self::EMPTY_GAME_STRING);
@@ -231,6 +288,10 @@ final class GameStateTest extends TestCase
     }
 
     /**
+     * Verifies that all open positions are returned as valid moves for ongoing games
+     *
+     * @param string $board game state string
+     *
      * @dataProvider variousGameStateProvider
      */
     public function testGetValidMovesReturnsOpenMovesForAnyGame(string $board)
@@ -246,6 +307,9 @@ final class GameStateTest extends TestCase
         $this->assertContainsOnlyInstancesOf(Move::class, $moves);
     }
 
+    /**
+     * Verifies that GameState::makeMove returns a different object for the next game state
+     */
     public function testMakeMove()
     {
         $game = GameState::createFromString(self::EMPTY_GAME_STRING);
@@ -269,6 +333,11 @@ final class GameStateTest extends TestCase
     }
 
     /**
+     * Tests the GameState::getWinner() method
+     *
+     * @param GameState $board    gameState
+     * @param mixed     $expected expected value
+     *
      * @dataProvider winTesterProvider
      */
     public function testGetWinner(GameState $board, $expected)
@@ -285,6 +354,16 @@ final class GameStateTest extends TestCase
         );
     }
 
+    /**
+     * Provider - winTester Arguments
+     *
+     * @uses validEndGameStrings()
+     * @uses validMidGameStrings()
+     *
+     * @return array[] Array of arguments arrays - arguments are:
+     *                      GameState Game state
+     *                      mixed     Expected Result
+     */
     public function winTesterProvider()
     {
         $endGameConditions = $this->validEndGameStrings();
@@ -348,6 +427,11 @@ final class GameStateTest extends TestCase
         return $inputs;
     }
 
+    /**
+     * Provider - Bad arguments for new game
+     *
+     * @return mixed[][]
+     */
     public function newGameBadArgumentProvider()
     {
         return [
@@ -360,21 +444,38 @@ final class GameStateTest extends TestCase
         ];
     }
 
+    /**
+     * Provider - Bad arguments for GameState::createFromString()
+     *
+     * @return array[] Array of arguments arrays - arguments are:
+     *                      string Game state argument
+     *                      mixed  token argument
+     *                      string Exception Class Name
+     *                      string Exception Message
+     */
     public function gameFromStringBadArgumentProvider()
     {
-        $newGame = self::EMPTY_GAME_STRING;
+        $newGame       = self::EMPTY_GAME_STRING;
+        $symbolMessage = 'Turn must be a player symbol';
+        $stateMessage  = 'Invalid Game State';
         return [
-            'Empty Marker'    => [$newGame,     '',     \InvalidArgumentException::class, 'Turn must be a player symbol'],
-            'Space Marker'    => [$newGame,     ' ',    \InvalidArgumentException::class, 'Turn must be a player symbol'],
-            'Null Marker'     => [$newGame,     null,   \InvalidArgumentException::class, 'Turn must be a player symbol'],
-            'Long Marker'     => [$newGame,     'LONG', \InvalidArgumentException::class, 'Turn must be a player symbol'],
-            'Board too Big'   => ['          ', 'X',    \InvalidArgumentException::class, 'Invalid Game State'],
-            'Board too Small' => ['        ',   'X',    \InvalidArgumentException::class, 'Invalid Game State'],
-            'Unknown Symbol'  => ['XO       ',  '+',    \InvalidArgumentException::class, 'Invalid Game State'],
-            'Unknown Symbol'  => ['XOH      ',  'X',    \InvalidArgumentException::class, 'Invalid Game State'],
+            'Empty Marker'    => [$newGame,     '',     \InvalidArgumentException::class, $symbolMessage],
+            'Space Marker'    => [$newGame,     ' ',    \InvalidArgumentException::class, $symbolMessage],
+            'Null Marker'     => [$newGame,     null,   \InvalidArgumentException::class, $symbolMessage],
+            'Long Marker'     => [$newGame,     'LONG', \InvalidArgumentException::class, $symbolMessage],
+            'Board too Big'   => ['          ', 'X',    \InvalidArgumentException::class, $stateMessage],
+            'Board too Small' => ['        ',   'X',    \InvalidArgumentException::class, $stateMessage],
+            'Unknown Symbol'  => ['XO       ',  '+',    \InvalidArgumentException::class, $stateMessage],
+            'Unknown Symbol'  => ['XOH      ',  'X',    \InvalidArgumentException::class, $stateMessage],
         ];
     }
 
+    /**
+     * Provider - Bad arguments for GameState::createFromArray()
+     *
+     * @return array[] Array of arguments arrays - arguments are:
+     *                      array Game state argument
+     */
     public function gameFromArrayBadArgumentProvider()
     {
         return [
@@ -402,6 +503,47 @@ final class GameStateTest extends TestCase
         ];
     }
 
+    /**
+     * Provider - End Game GameState Objects
+     *
+     * @uses validEndGameStrings()
+     *
+     * @return array[] Array of arguments arrays - arguments are:
+     *                      GameState Game state object
+     */
+    public function validEndGameProvider()
+    {
+        return array_map(function (string $boardString) {
+            return [GameState::createFromString($boardString, 'O')];
+        }, $this->validEndGameStrings());
+    }
+
+    /**
+     * Provider - GameState Strings
+     *
+     * @uses validEndGameStrings()
+     * @uses validMidGameStrings()
+     *
+     * @return array[] Array of arguments arrays - arguments are:
+     *                      string Game Board Strings
+     */
+    public function variousGameStateProvider()
+    {
+        $boards = array_merge(
+            $this->validEndGameStrings(),
+            $this->validMidGameStrings()
+        );
+        $boards['new'] = self::EMPTY_GAME_STRING;
+        return array_map(function (string $boardString) {
+            return [$boardString];
+        }, $boards);
+    }
+
+    /**
+     * Data Function - valid end game strings
+     *
+     * @return string[] array of game board strings meeting end-game conditions
+     */
     public function validEndGameStrings()
     {
         return [
@@ -420,6 +562,11 @@ final class GameStateTest extends TestCase
         ];
     }
 
+    /**
+     * Data Function - valid mid game strings
+     *
+     * @return string[] array of game board strings not meeting end-game conditions
+     */
     public function validMidGameStrings()
     {
         return [
@@ -432,24 +579,5 @@ final class GameStateTest extends TestCase
             'XO XOX XO',
             'XO XOXOXO',
         ];
-    }
-
-    public function validEndGameProvider()
-    {
-        return array_map(function (string $boardString) {
-            return [GameState::createFromString($boardString, 'O')];
-        }, $this->validEndGameStrings());
-    }
-
-    public function variousGameStateProvider()
-    {
-        $boards = array_merge(
-            $this->validEndGameStrings(),
-            $this->validMidGameStrings()
-        );
-        $boards['new'] = self::EMPTY_GAME_STRING;
-        return array_map(function (string $boardString) {
-            return [$boardString];
-        }, $boards);
     }
 }

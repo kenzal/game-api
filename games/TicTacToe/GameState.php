@@ -5,6 +5,9 @@ namespace Games\TicTacToe;
 use App\Abstracts\GameState as GameStateAbstract;
 use App\Interfaces\TwoPlayerGame;
 
+/**
+ * Immutable Tic-Tac-Toe Game State Class
+ */
 class GameState extends GameStateAbstract implements TwoPlayerGame
 {
     const DRAW_GAME       = 'Draw/Cat/Stalemate';
@@ -13,14 +16,35 @@ class GameState extends GameStateAbstract implements TwoPlayerGame
     const DEFAULT_UNUSED  = ' ';
     const UNUSED          = 'UnplayedSpace';
 
+    /**
+     * Map Array of symbols used internally and externally
+     *
+     * @var string[]
+     */
     protected $symbolMap = [];
 
-    /** @var array */
+    /**
+     * Game Board Representation
+     *
+     * @var string[][] string values should be self::PLAYER_A, self::PLAYER_B, self::UNUSED
+     */
     private $board = null;
 
-    /** @var string */
+    /**
+     * Current Player
+     *
+     * @var string value hould be self::PLAYER_A or self::PLAYER_B
+     */
     protected $turn=null;
 
+    /**
+     * Returns a instance of an unstarted Tic-Tac-Toe game state
+     *
+     * @param string $firstPlayer  Single Character Player Token (such as 'X')
+     * @param string $secondPlayer Single Character Player Token (such as 'O')
+     *
+     * @return self new instance of new game
+     */
     public static function getNewGame(
         $firstPlayer = self::DEFAULT_CROSSES,
         $secondPlayer = self::DEFAULT_NOUGHTS
@@ -28,6 +52,16 @@ class GameState extends GameStateAbstract implements TwoPlayerGame
         return new self($firstPlayer, $secondPlayer);
     }
 
+    /**
+     * Get a new Tic-Tac-Toe game state from a string and player token
+     *
+     * @param string $gameStateString 9-character string representation of the board
+     * @param string $turn            Single Character Player Token (such as 'X')
+     *
+     * @throws \InvalidArgumentException on invalid arguments
+     *
+     * @return self new instance of game state represented by the arguments
+     */
     public static function createFromString($gameStateString, $turn = self::DEFAULT_CROSSES)
     {
         if ($turn == self::DEFAULT_UNUSED || strlen($turn)!==1) {
@@ -54,6 +88,18 @@ class GameState extends GameStateAbstract implements TwoPlayerGame
     }
 
 
+    /**
+     * Get a new Tic-Tac-Toe game state from an array and player token
+     *
+     * @param string[][] $gameStateArray 3x3 two-dimensional array of strings representing the game board
+     * @param string     $turn           Single Character Player Token (such as 'X')
+     *
+     * @uses createFromString()
+     *
+     * @throws \InvalidArgumentException on invalid arguments
+     *
+     * @return self new instance of game state represented by the arguments
+     */
     public static function createFromArray(array $gameStateArray, string $turn = self::DEFAULT_CROSSES)
     {
         if (count($gameStateArray) !== 3) {
@@ -75,21 +121,43 @@ class GameState extends GameStateAbstract implements TwoPlayerGame
         return self::createFromString($stateString, $turn);
     }
 
+    /**
+     * Returns the representation of the first player
+     *
+     * @return string first player representation character
+     */
     public function getPlayerASymbol()
     {
         return $this->getSymbol(self::PLAYER_A);
     }
 
+    /**
+     * Returns the representation of the second player
+     *
+     * @return string second player representation character
+     */
     public function getPlayerBSymbol()
     {
         return $this->getSymbol(self::PLAYER_B);
     }
 
+    /**
+     * Returns the representation of the second player
+     *
+     * @return string character representation of unplayed space
+     */
     public function getEmptySymbol()
     {
         return $this->getSymbol(self::UNUSED);
     }
 
+    /**
+     * Returns if the player being checked for has a winning condition
+     *
+     * @param string $checkPlayer should be one of self::PLAYER_A or self::PLAYER_B
+     *
+     * @return bool player has a winning condition (three-in-a-line)
+     */
     protected function checkWinFor($checkPlayer)
     {
         //Array of all 8 win conditions
@@ -128,11 +196,23 @@ class GameState extends GameStateAbstract implements TwoPlayerGame
         return (bool)$winConditionsMet;
     }
 
+    /**
+     * Returns true if End-Game conditions have been reached
+     *
+     * End-Game conditions for Tic-Tac-Toe include a player achieving a win condition or no possible moves remaining
+     *
+     * @return boolean End-Game Conditions have been reached
+     */
     public function isEndGame()
     {
         return !is_null($this->getWinnerInternal());
     }
 
+    /**
+     * Returns the winner or draw if there is one, null if the game is unfinished
+     *
+     * @return string|null End-Game Conditions strings: self::PLAYER_A, self::PLAYER_B, self::DRAW_GAME
+     */
     protected function getWinnerInternal()
     {
         if ($this->checkWinFor(self::PLAYER_A)) {
@@ -166,6 +246,13 @@ class GameState extends GameStateAbstract implements TwoPlayerGame
         }
     }
 
+    /**
+     * Returns the game board as a string
+     *
+     * Single string of 9 characters (first, second, & third rows, no separator)
+     *
+     * @return string game board string
+     */
     public function asString()
     {
         return array_reduce(
@@ -176,11 +263,23 @@ class GameState extends GameStateAbstract implements TwoPlayerGame
         );
     }
 
+    /**
+     * Magic Method for string casting
+     *
+     * @uses asString()
+     *
+     * @return string game board string
+     */
     public function __toString()
     {
         return $this->asString();
     }
 
+    /**
+     * Returns the game board as a 3x3 two dimensional array of characters
+     *
+     * @return string[][] Game Board Array
+     */
     public function asArray()
     {
         $board = $this->board;
@@ -190,6 +289,11 @@ class GameState extends GameStateAbstract implements TwoPlayerGame
         return $board;
     }
 
+    /**
+     * Returns a list of all valid moves for the current player
+     *
+     * @return false|Move[] list of valid moves, false on endgame
+     */
     public function getValidMoves()
     {
         if ($this->isEndGame()) {
@@ -207,6 +311,13 @@ class GameState extends GameStateAbstract implements TwoPlayerGame
         return $moves;
     }
 
+    /**
+     * Returns a new game state with the move made and the next player set to play
+     *
+     * @param Move $move move for this game
+     *
+     * @return self new game state
+     */
     public function makeMove(Move $move)
     {
         $newState = clone $this;
@@ -215,16 +326,35 @@ class GameState extends GameStateAbstract implements TwoPlayerGame
         return $newState;
     }
 
+    /**
+     * Returns the player whose turn it is not
+     *
+     * @return string self::PLAYER_A or self::PLAYER_B
+     */
     protected function getOtherPlayer()
     {
         return $this->turn === self::PLAYER_A ? self::PLAYER_B : self::PLAYER_A;
     }
+
+    /**
+     * Returns the token of the current player
+     *
+     * @return string
+     */
 
     public function getTurnToMove()
     {
         return $this->getSymbol($this->turn);
     }
 
+    /**
+     * Protected constructor
+     *
+     * @param string $firstPlayer  Single Character Player Token (such as 'X')
+     * @param string $secondPlayer Single Character Player Token (such as 'O')
+     *
+     * @throws \BadMethodCallException On Argument Conflicts
+     */
     protected function __construct(
         $firstPlayer = self::DEFAULT_CROSSES,
         $secondPlayer = self::DEFAULT_NOUGHTS
@@ -249,6 +379,17 @@ class GameState extends GameStateAbstract implements TwoPlayerGame
         $this->turn = self::PLAYER_A;
     }
 
+    /**
+     * Returns the Internal Symbol Representation
+     *
+     * @param string $symbol External Symbol
+     *
+     * @return string Internal Symbol
+     *
+     * @uses $symbolMap for lookup
+     *
+     * @throws \OutOfBoundsException on symbols not found in the map
+     */
     protected function getFromSymbol($symbol)
     {
         $map = array_flip($this->symbolMap);
@@ -261,6 +402,17 @@ class GameState extends GameStateAbstract implements TwoPlayerGame
         return $map[$symbol];
     }
 
+    /**
+     * Returns the External Symbol Representation
+     *
+     * @param string $symbol Internal Symbol
+     *
+     * @return string External Symbol
+     *
+     * @uses $symbolMap for lookup
+     *
+     * @throws \OutOfBoundsException on symbols not found in the map
+     */
     protected function getSymbol($position)
     {
         if (!array_key_exists($position, $this->symbolMap)) {
