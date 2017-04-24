@@ -6,11 +6,17 @@ use Games\TicTacToe\GameState;
 use PHPUnit\Framework\TestCase;
 
 /**
+ * PHPUnit Test covering the Move Class
+ *
  * @covers \Games\TicTacToe\Move
  */
 final class MoveTest extends TestCase
 {
-    /** @var GameState */
+    /**
+     * Mock GameState Object
+     *
+     * @var GameState
+     */
     protected $mockState;
 
     public function setUp()
@@ -19,11 +25,14 @@ final class MoveTest extends TestCase
     }
 
     /**
+     * Verifies that the class can be created using a valid set of coordinates
+     *
      * @param int $xPos X-Position (0-based Column)
      * @param int $yPos Y-Position (0-based Row)
+     *
      * @dataProvider validCoordinatesProvider
      */
-    public function testCanBeCreatedWithInvalidCoordinates(int $xPos, int $yPos)
+    public function testCanBeCreatedWithValidCoordinates(int $xPos, int $yPos)
     {
         $this->assertInstanceOf(
             Move::class,
@@ -32,8 +41,11 @@ final class MoveTest extends TestCase
     }
 
     /**
+     * Verifies that the GetX() and GetY() methods function correctly
+     *
      * @param int $xPos X-Position (0-based Column)
      * @param int $yPos Y-Position (0-based Row)
+     *
      * @dataProvider validCoordinatesProvider
      */
     public function testGetFunctions(int $xPos, int $yPos)
@@ -44,8 +56,11 @@ final class MoveTest extends TestCase
     }
 
     /**
+     * Verifies that the asArray() method returns an array with the expected format
+     *
      * @param int $xPos X-Position (0-based Column)
      * @param int $yPos Y-Position (0-based Row)
+     *
      * @dataProvider validCoordinatesProvider
      */
     public function testAsArray(int $xPos, int $yPos)
@@ -61,6 +76,11 @@ final class MoveTest extends TestCase
     }
 
     /**
+     * Verifies that a Move can not be created with invalid coordinates
+     *
+     * @param int $xPos X-Position (0-based Column)
+     * @param int $yPos Y-Position (0-based Row)
+     *
      * @dataProvider invalidCoordinatesProvider
      */
     public function testCannotBeCreatedWithInvalidCoordinates($xPos, $yPos)

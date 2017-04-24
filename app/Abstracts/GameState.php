@@ -2,6 +2,9 @@
 
 namespace App\Abstracts;
 
+/**
+ * Abstract Game State Class
+ */
 abstract class GameState
 {
     /**
@@ -13,7 +16,20 @@ abstract class GameState
     {
     }
 
+    /**
+     * Gets an instance representing the state of a new game
+     *
+     * @return self instance representing the gamestate of a new game
+     */
     abstract public static function getNewGame();
 
+
+    /**
+     * Checks to see if the game is over
+     *
+     * Implementiaton depends on individual game
+     *
+     * @return mixed
+     */
     abstract public function isEndGame();
 }

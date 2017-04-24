@@ -362,16 +362,18 @@ final class GameStateTest extends TestCase
 
     public function gameFromStringBadArgumentProvider()
     {
-        $newGame = self::EMPTY_GAME_STRING;
+        $newGame       = self::EMPTY_GAME_STRING;
+        $symbolMessage = 'Turn must be a player symbol';
+        $stateMessage  = 'Invalid Game State';
         return [
-            'Empty Marker'    => [$newGame,     '',     \InvalidArgumentException::class, 'Turn must be a player symbol'],
-            'Space Marker'    => [$newGame,     ' ',    \InvalidArgumentException::class, 'Turn must be a player symbol'],
-            'Null Marker'     => [$newGame,     null,   \InvalidArgumentException::class, 'Turn must be a player symbol'],
-            'Long Marker'     => [$newGame,     'LONG', \InvalidArgumentException::class, 'Turn must be a player symbol'],
-            'Board too Big'   => ['          ', 'X',    \InvalidArgumentException::class, 'Invalid Game State'],
-            'Board too Small' => ['        ',   'X',    \InvalidArgumentException::class, 'Invalid Game State'],
-            'Unknown Symbol'  => ['XO       ',  '+',    \InvalidArgumentException::class, 'Invalid Game State'],
-            'Unknown Symbol'  => ['XOH      ',  'X',    \InvalidArgumentException::class, 'Invalid Game State'],
+            'Empty Marker'    => [$newGame,     '',     \InvalidArgumentException::class, $symbolMessage],
+            'Space Marker'    => [$newGame,     ' ',    \InvalidArgumentException::class, $symbolMessage],
+            'Null Marker'     => [$newGame,     null,   \InvalidArgumentException::class, $symbolMessage],
+            'Long Marker'     => [$newGame,     'LONG', \InvalidArgumentException::class, $symbolMessage],
+            'Board too Big'   => ['          ', 'X',    \InvalidArgumentException::class, $stateMessage],
+            'Board too Small' => ['        ',   'X',    \InvalidArgumentException::class, $stateMessage],
+            'Unknown Symbol'  => ['XO       ',  '+',    \InvalidArgumentException::class, $stateMessage],
+            'Unknown Symbol'  => ['XOH      ',  'X',    \InvalidArgumentException::class, $stateMessage],
         ];
     }
 
