@@ -26,16 +26,19 @@ function resetBoard() {
 function checkForWinner() {
     $.ajax({
         type:"POST",
-        data:{
-        	action: "getWinner",
-            boardState: getBoardArray(),
-        },
-        success: function (data) {
-            console.log(data);
+        data: JSON.stringify({
+            jsonrpc:'2.0',
+            method:'getWinner',
+            params:{boardState: getBoardArray()},
+            id:"web-win-check"
+        }),
+        success: function (responseString) {
+            var response = JSON.parse(responseString);
+            console.log(response);
             var message = '';
-            switch (data) {
+            switch (response.result) {
             	case null: //Game Not over
-            		return false;
+            		return true;
             	case false: //Draw Game
             		message = "The game was a Draw.";
             		break;
@@ -58,18 +61,23 @@ function makeMove() {
     var engine = $("#opponent").val();
     $.ajax({
         type:"POST",
-        data:{
-        	action: "makeMove",
-            boardState: getBoardArray(),
-            playerUnit: opponent,
-            "opponent": engine
-        },
-        success: function (data) {
-            console.log(data);
+        data: JSON.stringify({
+            jsonrpc:'2.0',
+            method:'makeMove',
+            params: {
+                boardState: getBoardArray(),
+                playerUnit: opponent,
+                "opponent": engine
+            },
+            id: "web-makeMove"
+        }),
+        success: function (responseString) {
+            var response = JSON.parse(responseString);
+            // console.log(response);
             var board = $(".t3board")[0];
-            if(data) {
-	            var cell = board.rows[data[1]].cells[data[0]]; // This is a DOM "TD" element
-				$(cell).text(data[2]);
+            if(response.result) {
+	            var cell = board.rows[response.result[1]].cells[response.result[0]]; // This is a DOM "TD" element
+				$(cell).text(response.result[2]);
 			}
         	checkForWinner()
         }
@@ -81,7 +89,7 @@ $(document).ready(function(){
         var col = $(this).index();
         var $tr = $(this).closest("tr");
         var row = $tr.index();
-        console.log(row, col);
+        // console.log(row, col);
 		$("#EngineFirst").hide();
         if($(this).text() != "" || gameOver) {
         	return false;
