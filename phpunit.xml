@@ -1,0 +1,16 @@
+<phpunit bootstrap="./vendor/autoload.php">
+	<filter>
+		<whitelist processUncoveredFilesFromWhitelist="true">
+			<directory>games</directory>
+			<directory>app</directory>
+			<exclude>
+				<file>games/TicTacToe/index.php</file>
+			</exclude>
+		</whitelist>
+	</filter>
+	<testsuites>
+		<testsuite name="All">
+			<directory>tests</directory>
+		</testsuite>
+	</testsuites>
+</phpunit>

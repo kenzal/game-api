@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for /Users/khunter/Sites/game-api/games</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../.css/bootstrap.min.css" rel="stylesheet">
+  <link href="../.css/nv.d3.min.css" rel="stylesheet">
+  <link href="../.css/style.css" rel="stylesheet">
+  <!--[if lt IE 9]>
+  <script src="../.js/html5shiv.min.js"></script>
+  <script src="../.js/respond.min.js"></script>
+  <![endif]-->
+ </head>
+ <body>
+  <header>
+   <div class="container">
+    <div class="row">
+     <div class="col-md-12">
+      <ol class="breadcrumb">
+        <li><a href="../index.html">/Users/khunter/Sites/game-api</a></li>
+        <li><a href="index.html">games</a></li>
+        <li class="active">(Dashboard)</li>
+
+      </ol>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="TicTacToe/Engines/Blocker.php.html#7">Blocker</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicTacToe/Engines/EngineAbstract.php.html#7">EngineAbstract</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicTacToe/Engines/Random.php.html#5">Random</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicTacToe/Engines/WinChecker.php.html#5">WinChecker</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicTacToe/GameState.php.html#5">GameState</a></td><td class="text-right">0%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="TicTacToe/GameState.php.html#5">GameState</a></td><td class="text-right">1332</td></tr>
+       <tr><td><a href="TicTacToe/Engines/Blocker.php.html#7">Blocker</a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="TicTacToe/Engines/EngineAbstract.php.html#7">EngineAbstract</a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="TicTacToe/Engines/WinChecker.php.html#5">WinChecker</a></td><td class="text-right">12</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="TicTacToe/Engines/Blocker.php.html#9"><abbr title="Blocker::getConsideredMoves">getConsideredMoves</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicTacToe/GameState.php.html#159"><abbr title="GameState::anonymous function">anonymous function</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicTacToe/GameState.php.html#200"><abbr title="GameState::getFromSymbol">getFromSymbol</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicTacToe/GameState.php.html#195"><abbr title="GameState::getTurnToMove">getTurnToMove</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicTacToe/GameState.php.html#190"><abbr title="GameState::getOtherPlayer">getOtherPlayer</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicTacToe/GameState.php.html#182"><abbr title="GameState::makeMove">makeMove</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicTacToe/GameState.php.html#165"><abbr title="GameState::getValidMoves">getValidMoves</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicTacToe/GameState.php.html#156"><abbr title="GameState::asArray">asArray</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicTacToe/GameState.php.html#147"><abbr title="GameState::asString">asString</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicTacToe/GameState.php.html#133"><abbr title="GameState::CreateFromArray">CreateFromArray</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicTacToe/GameState.php.html#104"><abbr title="GameState::CreateFromString">CreateFromString</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicTacToe/GameState.php.html#61"><abbr title="GameState::isEndGame">isEndGame</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicTacToe/Engines/Blocker.php.html#21"><abbr title="Blocker::anonymous function">anonymous function</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicTacToe/GameState.php.html#55"><abbr title="GameState::getEmptySymbol">getEmptySymbol</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicTacToe/GameState.php.html#51"><abbr title="GameState::getPlayerBSymbol">getPlayerBSymbol</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicTacToe/GameState.php.html#47"><abbr title="GameState::getPlayerASymbol">getPlayerASymbol</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicTacToe/GameState.php.html#40"><abbr title="GameState::getNewGame">getNewGame</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicTacToe/GameState.php.html#18"><abbr title="GameState::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicTacToe/Engines/WinChecker.php.html#13"><abbr title="WinChecker::anonymous function">anonymous function</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicTacToe/Engines/WinChecker.php.html#7"><abbr title="WinChecker::getConsideredMoves">getConsideredMoves</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicTacToe/Engines/Random.php.html#7"><abbr title="Random::getConsideredMoves">getConsideredMoves</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicTacToe/Engines/EngineAbstract.php.html#18"><abbr title="EngineAbstract::getMove">getMove</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicTacToe/Engines/EngineAbstract.php.html#11"><abbr title="EngineAbstract::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicTacToe/GameState.php.html#209"><abbr title="GameState::getSymbol">getSymbol</abbr></a></td><td class="text-right">0%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="TicTacToe/GameState.php.html#104"><abbr title="GameState::CreateFromString">CreateFromString</abbr></a></td><td class="text-right">90</td></tr>
+       <tr><td><a href="TicTacToe/GameState.php.html#165"><abbr title="GameState::getValidMoves">getValidMoves</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="TicTacToe/Engines/Blocker.php.html#9"><abbr title="Blocker::getConsideredMoves">getConsideredMoves</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="TicTacToe/GameState.php.html#18"><abbr title="GameState::__construct">__construct</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="TicTacToe/Engines/EngineAbstract.php.html#18"><abbr title="EngineAbstract::getMove">getMove</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="TicTacToe/Engines/WinChecker.php.html#7"><abbr title="WinChecker::getConsideredMoves">getConsideredMoves</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="TicTacToe/GameState.php.html#61"><abbr title="GameState::isEndGame">isEndGame</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="TicTacToe/GameState.php.html#133"><abbr title="GameState::CreateFromArray">CreateFromArray</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="TicTacToe/GameState.php.html#190"><abbr title="GameState::getOtherPlayer">getOtherPlayer</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="TicTacToe/GameState.php.html#200"><abbr title="GameState::getFromSymbol">getFromSymbol</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="TicTacToe/GameState.php.html#209"><abbr title="GameState::getSymbol">getSymbol</abbr></a></td><td class="text-right">6</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="https://github.com/sebastianbergmann/php-code-coverage" target="_top">php-code-coverage 5.2.1</a> using <a href="https://secure.php.net/" target="_top">PHP 7.1.4</a> with <a href="https://xdebug.org/">Xdebug 2.5.3</a> and <a href="https://phpunit.de/">PHPUnit 6.1.1</a> at Fri Apr 21 20:54:45 UTC 2017.</small>
+    </p>
+   </footer>
+  </div>
+  <script src="../.js/jquery.min.js" type="text/javascript"></script>
+  <script src="../.js/bootstrap.min.js" type="text/javascript"></script>
+  <script src="../.js/holder.min.js" type="text/javascript"></script>
+  <script src="../.js/d3.min.js" type="text/javascript"></script>
+  <script src="../.js/nv.d3.min.js" type="text/javascript"></script>
+  <script type="text/javascript">
+$(document).ready(function() {
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#classCoverageDistribution svg')
+      .datum(getCoverageDistributionData([5,0,0,0,0,0,0,0,0,0,0,1], "Class Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#methodCoverageDistribution svg')
+      .datum(getCoverageDistributionData([24,0,0,0,0,0,0,0,0,0,0,5], "Method Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getCoverageDistributionData(data, label) {
+    var labels = [
+      '0%',
+      '0-10%',
+      '10-20%',
+      '20-30%',
+      '30-40%',
+      '40-50%',
+      '50-60%',
+      '60-70%',
+      '70-80%',
+      '80-90%',
+      '90-100%',
+      '100%'
+    ];
+    var values = [];
+    $.each(labels, function(key) {
+      values.push({x: labels[key], y: data[key]});
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Cyclomatic Complexity');
+
+    d3.select('#classComplexity svg')
+      .datum(getComplexityData([[0,4,"<a href=\"TicTacToe\/Engines\/Blocker.php.html#7\">Blocker<\/a>"],[0,4,"<a href=\"TicTacToe\/Engines\/EngineAbstract.php.html#7\">EngineAbstract<\/a>"],[0,1,"<a href=\"TicTacToe\/Engines\/Random.php.html#5\">Random<\/a>"],[0,3,"<a href=\"TicTacToe\/Engines\/WinChecker.php.html#5\">WinChecker<\/a>"],[0,36,"<a href=\"TicTacToe\/GameState.php.html#5\">GameState<\/a>"],[100,8,"<a href=\"TicTacToe\/Move.php.html#5\">Move<\/a>"]], 'Class Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Method Complexity');
+
+    d3.select('#methodComplexity svg')
+      .datum(getComplexityData([[0,3,"<a href=\"TicTacToe\/Engines\/Blocker.php.html#9\">Blocker::getConsideredMoves<\/a>"],[0,1,"<a href=\"TicTacToe\/Engines\/Blocker.php.html#21\">Blocker::anonymous function<\/a>"],[0,1,"<a href=\"TicTacToe\/Engines\/EngineAbstract.php.html#11\">EngineAbstract::__construct<\/a>"],[100,1,"<a href=\"TicTacToe\/Engines\/EngineAbstract.php.html#16\">EngineAbstract::getConsideredMoves<\/a>"],[0,2,"<a href=\"TicTacToe\/Engines\/EngineAbstract.php.html#18\">EngineAbstract::getMove<\/a>"],[0,1,"<a href=\"TicTacToe\/Engines\/Random.php.html#7\">Random::getConsideredMoves<\/a>"],[0,2,"<a href=\"TicTacToe\/Engines\/WinChecker.php.html#7\">WinChecker::getConsideredMoves<\/a>"],[0,1,"<a href=\"TicTacToe\/Engines\/WinChecker.php.html#13\">WinChecker::anonymous function<\/a>"],[0,3,"<a href=\"TicTacToe\/GameState.php.html#18\">GameState::__construct<\/a>"],[0,1,"<a href=\"TicTacToe\/GameState.php.html#40\">GameState::getNewGame<\/a>"],[0,1,"<a href=\"TicTacToe\/GameState.php.html#47\">GameState::getPlayerASymbol<\/a>"],[0,1,"<a href=\"TicTacToe\/GameState.php.html#51\">GameState::getPlayerBSymbol<\/a>"],[0,1,"<a href=\"TicTacToe\/GameState.php.html#55\">GameState::getEmptySymbol<\/a>"],[0,2,"<a href=\"TicTacToe\/GameState.php.html#61\">GameState::isEndGame<\/a>"],[0,1,"<a href=\"TicTacToe\/GameState.php.html#159\">GameState::anonymous function<\/a>"],[0,9,"<a href=\"TicTacToe\/GameState.php.html#104\">GameState::CreateFromString<\/a>"],[0,2,"<a href=\"TicTacToe\/GameState.php.html#133\">GameState::CreateFromArray<\/a>"],[0,1,"<a href=\"TicTacToe\/GameState.php.html#147\">GameState::asString<\/a>"],[0,1,"<a href=\"TicTacToe\/GameState.php.html#156\">GameState::asArray<\/a>"],[0,5,"<a href=\"TicTacToe\/GameState.php.html#165\">GameState::getValidMoves<\/a>"],[0,1,"<a href=\"TicTacToe\/GameState.php.html#182\">GameState::makeMove<\/a>"],[0,2,"<a href=\"TicTacToe\/GameState.php.html#190\">GameState::getOtherPlayer<\/a>"],[0,1,"<a href=\"TicTacToe\/GameState.php.html#195\">GameState::getTurnToMove<\/a>"],[0,2,"<a href=\"TicTacToe\/GameState.php.html#200\">GameState::getFromSymbol<\/a>"],[0,2,"<a href=\"TicTacToe\/GameState.php.html#209\">GameState::getSymbol<\/a>"],[100,5,"<a href=\"TicTacToe\/Move.php.html#11\">Move::__construct<\/a>"],[100,1,"<a href=\"TicTacToe\/Move.php.html#24\">Move::asArray<\/a>"],[100,1,"<a href=\"TicTacToe\/Move.php.html#33\">Move::getY<\/a>"],[100,1,"<a href=\"TicTacToe\/Move.php.html#38\">Move::getX<\/a>"]], 'Method Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getComplexityData(data, label) {
+    var values = [];
+    $.each(data, function(key) {
+      var value = Math.round(data[key][0]*100) / 100;
+      values.push({
+        x: value,
+        y: data[key][1],
+        class: data[key][2],
+        size: 0.05,
+        shape: 'diamond'
+      });
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+});
+  </script>
+ </body>
+</html>
