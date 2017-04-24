@@ -41,78 +41,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-?>
+?><!DOCTYPE html>
 <html>
     <head>
-        <style type="text/css">
-            .t3board {
-                border-collapse: collapse;
-                vertical-align: center;
-                text-align: center;
-                margin-left:auto;
-                margin-right:auto;
-            }
-            .t3board td {
-                border: 0;
-                border-top: 4px solid;
-                border-left: 4px solid;
-                width: 5em;
-                height: 5em;
-                padding: 0;
-                cursor: cell;
-            }
-            .t3board tr:first-of-type td{
-                border-top: 0;
-            }
-            .t3board tr td:first-of-type {
-                border-left: 0;
-            }
-
-            .t3board button {
-                width: 4em;
-                height: 4em;
-            }
-
-            .engineList .engineName {
-                font-weight: bold;
-                font-size: larger;
-            }
-
-            .engineList .engineDescription:before {
-                content: ' — ';
-            }
-
-            #gameForm {
-                width: 20em;
-                text-align: center;
-            }
-
-            #opponentBlock {
-                margin-bottom: 1em;
-                width: 15em;
-                margin-left:auto;
-                margin-right:auto;
-            }
-
-            #EngineFirst {
-                width: 100%;
-                height: 2em;
-                margin-top: 1em;
-                margin-left:auto;
-                margin-right:auto;
-            }
-
-            #Reset {
-                width: 100%;
-                height: 2em;
-                margin-top: 1em;
-                margin-left:auto;
-                margin-right:auto;
-            }
-
-        </style>
+        <meta charset="UTF-8">
+        <title>Games &ndash; Tic-Tac-Toe</title>
+        <link href="./t3.css" type="text/css" rel="stylesheet" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src=".\t3.js"></script>
+        <script src="./t3.js"></script>
     </head>
     <body>
         <h1>Tic-Tac-Toe</h1>
