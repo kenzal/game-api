@@ -3,32 +3,22 @@ namespace Games\TicTacToe;
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
-function getGameString(GameState $game)
-{
-    // return preg_replace('/^(.)(.)(.)(.)(.)(.)(.)(.)(.)$/',"\\1|\\2|\\3\n—+—+—\n\\4|\\5|\\6\n—+—+—\n\\7|\\8|\\9", $game->asString());
-    $str= '<table class="t3board"><tr>'
-        . implode(
-            '</tr></tr>',
-            array_map(
-                function ($row) {
-                    return '<td>'.implode('</td><td>', $row).'</td>';
-                },
-                $game->asArray()
-            )
-        )
-        . '</tr></table>';
-    return $str;
-}
-
 $engines = [
     'Random'     => ['class' => Engines\Random::class,     'description' => 'No strategy, just random placement.'],
-    'WinChecker' => ['class' => Engines\WinChecker::class, 'description' => 'Trys for a win if presented with one.'],
-    'Blocker'    => ['class' => Engines\Blocker::class,    'description' => 'Trys to block opponent from winning.'],
+    'WinChecker' => ['class' => Engines\WinChecker::class, 'description' => 'Selects a win if presented with one.'],
+    'Blocker'    => ['class' => Engines\Blocker::class,    'description' => 'Attempts to block opponent from winning.'],
 ];
 
 $selectedEngine = $_REQUEST['opponent'] ?? null;
 if (!array_key_exists($selectedEngine, $engines)) {
     $selectedEngine = array_keys($engines)[0];
+}
+
+function sendBadRequest()
+{
+    http_response_code(400);
+    header("HTTP/1.0 400 Bad Request");
+    exit(1);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -38,7 +28,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($action == 'makeMove') {
         $board  = $_REQUEST['boardState'] ?? null;
         $player = $_REQUEST['playerUnit'] ?? null;
-        //TODO: verify input
+        if (!is_array($board) || !is_string($player) || strlen($player)!==1) {
+            sendBadRequest();
+        }
         $move = $api->makeMove($board, $player);
         echo json_encode($move);
         return;
@@ -47,22 +39,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo json_encode($api->getWinner($board));
         return;
     }
-    http_response_code(400);
-    header("HTTP/1.0 400 Bad Request");
-    return;
+    sendBadRequest();
 }
 
 ?>
 <html>
     <head>
         <style type="text/css">
-            table.chart {
-                border-collapse: collapse;
-            }
-            .chart th, .chart td {
-                border: 2px solid;
-                padding: 1em;
-            }
             .t3board {
                 border-collapse: collapse;
                 vertical-align: center;
