@@ -70,6 +70,7 @@ class Api implements MoveInterface
      * Returns the first player token found on the game board array
      *
      * @param string[][] $arr gameboard array
+     *
      * @return string single character token representing the first player located in the array
      */
     protected function getFirstPiece(array $arr)
@@ -87,6 +88,7 @@ class Api implements MoveInterface
      * Returns the winner from the current game, if any
      *
      * @param string[][] $boardState two dimensional array of single character strings representing the board
+     *
      * @return string|false|null single character string of the winning player's token,
      *                           false on draw game,
      *                           null on unfinished game

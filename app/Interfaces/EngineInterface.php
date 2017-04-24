@@ -15,6 +15,7 @@ interface EngineInterface
 
     /**
      * Return all considered moves for the current gamestate
+     *
      * @return null|mixed[]|\Iterable List of considered moves
      */
     public function getConsideredMoves();

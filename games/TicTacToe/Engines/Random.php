@@ -2,6 +2,9 @@
 
 namespace Games\TicTacToe\Engines;
 
+/**
+ * Tic-Tac-Toe Engine with No Focus
+ */
 class Random extends EngineAbstract
 {
 

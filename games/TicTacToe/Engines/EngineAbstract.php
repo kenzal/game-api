@@ -13,6 +13,7 @@ abstract class EngineAbstract implements EngineInterface
 {
     /**
      * Current Game State
+     *
      * @var GameState
      */
     protected $state;
@@ -37,7 +38,7 @@ abstract class EngineAbstract implements EngineInterface
     /**
      * Returns a single move from those considered
      *
-     * @uses  getConsideredMoves()
+     * @uses getConsideredMoves()
      *
      * @return false|Move Move to make
      */

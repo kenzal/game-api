@@ -40,8 +40,8 @@ class GameState extends GameStateAbstract implements TwoPlayerGame
     /**
      * Returns a instance of an unstarted Tic-Tac-Toe game state
      *
-     * @param  string $firstPlayer  Single Character Player Token (such as 'X')
-     * @param  string $secondPlayer Single Character Player Token (such as 'O')
+     * @param string $firstPlayer  Single Character Player Token (such as 'X')
+     * @param string $secondPlayer Single Character Player Token (such as 'O')
      *
      * @return self new instance of new game
      */
@@ -55,10 +55,10 @@ class GameState extends GameStateAbstract implements TwoPlayerGame
     /**
      * Get a new Tic-Tac-Toe game state from a string and player token
      *
-     * @throws \InvalidArgumentException on invalid arguments
+     * @param string $gameStateString 9-character string representation of the board
+     * @param string $turn            Single Character Player Token (such as 'X')
      *
-     * @param  string $gameStateString 9-character string representation of the board
-     * @param  string $turn            Single Character Player Token (such as 'X')
+     * @throws \InvalidArgumentException on invalid arguments
      *
      * @return self new instance of game state represented by the arguments
      */
@@ -91,12 +91,12 @@ class GameState extends GameStateAbstract implements TwoPlayerGame
     /**
      * Get a new Tic-Tac-Toe game state from an array and player token
      *
-     * @uses  createFromString()
+     * @param string[][] $gameStateArray 3x3 two-dimensional array of strings representing the game board
+     * @param string     $turn           Single Character Player Token (such as 'X')
+     *
+     * @uses createFromString()
      *
      * @throws \InvalidArgumentException on invalid arguments
-     *
-     * @param  string[][] $gameStateArray 3x3 two-dimensional array of strings representing the game board
-     * @param  string     $turn           Single Character Player Token (such as 'X')
      *
      * @return self new instance of game state represented by the arguments
      */
@@ -154,7 +154,7 @@ class GameState extends GameStateAbstract implements TwoPlayerGame
     /**
      * Returns if the player being checked for has a winning condition
      *
-     * @param  string $checkPlayer should be one of self::PLAYER_A or self::PLAYER_B
+     * @param string $checkPlayer should be one of self::PLAYER_A or self::PLAYER_B
      *
      * @return bool player has a winning condition (three-in-a-line)
      */
@@ -266,7 +266,7 @@ class GameState extends GameStateAbstract implements TwoPlayerGame
     /**
      * Magic Method for string casting
      *
-     * @uses  asString()
+     * @uses asString()
      *
      * @return string game board string
      */
@@ -314,8 +314,9 @@ class GameState extends GameStateAbstract implements TwoPlayerGame
     /**
      * Returns a new game state with the move made and the next player set to play
      *
-     * @param  Move   $move [description]
-     * @return [type]       [description]
+     * @param Move $move move for this game
+     *
+     * @return self new game state
      */
     public function makeMove(Move $move)
     {
@@ -349,10 +350,10 @@ class GameState extends GameStateAbstract implements TwoPlayerGame
     /**
      * Protected constructor
      *
-     * @throws \BadMethodCallException On Argument Conflicts
-     *
      * @param string $firstPlayer  Single Character Player Token (such as 'X')
      * @param string $secondPlayer Single Character Player Token (such as 'O')
+     *
+     * @throws \BadMethodCallException On Argument Conflicts
      */
     protected function __construct(
         $firstPlayer = self::DEFAULT_CROSSES,
@@ -381,13 +382,13 @@ class GameState extends GameStateAbstract implements TwoPlayerGame
     /**
      * Returns the Internal Symbol Representation
      *
-     * @uses  $symbolMap for lookup
-     *
-     * @throws \OutOfBoundsException on symbols not found in the map
-     *
-     * @param  string $symbol External Symbol
+     * @param string $symbol External Symbol
      *
      * @return string Internal Symbol
+     *
+     * @uses $symbolMap for lookup
+     *
+     * @throws \OutOfBoundsException on symbols not found in the map
      */
     protected function getFromSymbol($symbol)
     {
@@ -404,13 +405,13 @@ class GameState extends GameStateAbstract implements TwoPlayerGame
     /**
      * Returns the External Symbol Representation
      *
-     * @uses  $symbolMap for lookup
-     *
-     * @throws \OutOfBoundsException on symbols not found in the map
-     *
-     * @param  string $symbol Internal Symbol
+     * @param string $symbol Internal Symbol
      *
      * @return string External Symbol
+     *
+     * @uses $symbolMap for lookup
+     *
+     * @throws \OutOfBoundsException on symbols not found in the map
      */
     protected function getSymbol($position)
     {

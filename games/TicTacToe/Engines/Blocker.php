@@ -16,7 +16,7 @@ class Blocker extends EngineAbstract
      * Filters all moves to ones that would prevent the opponent from winning.
      * If no such moves are available, all valid moves are considered
      *
-     * @uses  getNextState()
+     * @uses getNextState()
      *
      * @return false|Move[] List of valid Moves
      */

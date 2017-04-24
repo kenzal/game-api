@@ -2,6 +2,9 @@
 
 namespace Games\TicTacToe\Engines;
 
+/**
+ * Tic-Tac-Toe Engine with Immediate Win Focus
+ */
 class WinChecker extends EngineAbstract
 {
     /**
@@ -9,7 +12,6 @@ class WinChecker extends EngineAbstract
      *
      * Filters all moves to ones that would present a winning scenerio.
      * If no such moves are available, all valid moves are considered
-     *
      *
      * @return false|Move[] List of valid Moves
      */

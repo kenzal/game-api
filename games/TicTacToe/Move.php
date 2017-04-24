@@ -1,6 +1,7 @@
 <?php
 
 namespace Games\TicTacToe;
+
 /**
  * Tic-Tac-Toe Move Class
  */
@@ -9,6 +10,7 @@ class Move
 
     /**
      * X-Coordinate (0-based column)
+     *
      * @var int
      */
     protected $xCoOrd;
@@ -16,6 +18,7 @@ class Move
 
     /**
      * Y-Coordinate (0-based row)
+     *
      * @var int
      */
     protected $yCoOrd;
@@ -23,6 +26,7 @@ class Move
 
     /**
      * Game State
+     *
      * @var GameState tic-tac-toe game state
      */
     protected $gameState;
@@ -30,11 +34,11 @@ class Move
     /**
      * Construct move from game state and 0-based coordinates
      *
-     * @throws  \OutOfRangeException on out-of-range coordiantes
-     *
      * @param GameState $game      Tic-Tac-Toe game state
      * @param int       $xLocation X-Coordinate (0-based column)
      * @param int       $yLocation Y-Coordinate (0-based row)
+     *
+     * @throws \OutOfRangeException on out-of-range coordiantes
      */
     public function __construct(GameState $game, $xLocation, $yLocation)
     {

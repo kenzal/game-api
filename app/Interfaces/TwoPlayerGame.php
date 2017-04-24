@@ -13,12 +13,14 @@ interface TwoPlayerGame
 
     /**
      * Returns the representation of the first player
+     *
      * @return mixed first player representation
      */
     public function getPlayerASymbol();
 
     /**
      * Returns the representation of the second player
+     *
      * @return mixed second player representation
      */
     public function getPlayerBSymbol();
